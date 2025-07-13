@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply to Be a Scribe - Pick Scribe</title>
+  <link rel="stylesheet" href="global_styles.css" />
+  <style>
+  /* Override or extend shared styles specifically for this form page */
+
+  main {
+    background: linear-gradient(to bottom right, #ffffff, #e3f2fd);
+    border: 2px solid #1976d2;
+  }
+
+  form {
+    background-color: #fdfdfd;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #cfd8dc;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  label {
+    color: #0d47a1;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  input, select, textarea {
+    background-color: #f7fbff;
+    border: 1px solid #90caf9;
+    font-size: 1rem;
+    color: #212121;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: #2e7d32; /* Green for focus */
+    background-color: #e8f5e9;
+  }
+
+  button {
+    background-color: #1976d2;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  button:hover, button:focus {
+    background-color: #2e7d32; /* Green on hover */
+  }
+
+  .info-text {
+    background-color: #fff8e1;
+    border-left: 5px solid #fb8c00; /* Orange */
+    color: #444;
+    margin-top: 20px;
+  }
+
+  /* Optional: highlight required fields */
+  label::after {
+    content: " *";
+    color: #d32f2f;
+    font-weight: normal;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    form {
+      padding: 15px;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <header role="banner">
+    <h1 tabindex="0">Apply to Become a Scribe</h1>
+    <p class="tagline" tabindex="0">Join Pick Scribe and support visually impaired students in their academic journey</p>
+  </header>
+
+  <main role="main" aria-labelledby="form-title">
+    <h2 id="form-title" tabindex="0">Scribe Registration Form</h2>
+    <p tabindex="0">
+      Fill out the form below to become a registered volunteer scribe. Your information will remain private and will only be shared if a visually impaired student selects you.
+    </p>
+
+    <form id='form' aria-label="Scribe application form">
+      <div>
+        <label for="fullname">Full Name *</label>
+        <input type="text" id="fullname" name="fullname" required aria-required="true" autocomplete="off" />
+      </div>
+
+      <div>
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required aria-required="true" autocomplete="off" />
+      </div>
+
+      <div>
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" name="phone" required aria-required="true" pattern="[0-9]{10}" maxlength="10" autocomplete="off" />
+      </div>
+
+      <div>
+        <label for="state">State *</label>
+        <select id="state" name="state" required aria-required="true">
+          <option value="">-- Select your state --</option>
+          <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+          <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option><option>Gujarat</option>
+          <option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option>
+          <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+          <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option><option>Odisha</option>
+          <option>Punjab</option><option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
+          <option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+          <option>West Bengal</option><option>Andaman and Nicobar Islands</option><option>Chandigarh</option>
+          <option>Dadra and Nagar Haveli and Daman and Diu</option><option>Delhi</option><option>Lakshadweep</option>
+          <option>Puducherry</option><option>Ladakh</option><option>Jammu and Kashmir</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="subjects">Subjects or Exams You Can Assist With *</label>
+        <select id="subjects" name="subjects" required aria-required="true">
+          <option value="">-- Select a subject or exam --</option>
+          <option>Mathematics</option><option>English</option><option>Science</option><option>Social Science</option>
+          <option>Hindi</option><option>History</option><option>Geography</option><option>Physics</option>
+          <option>Chemistry</option><option>Biology</option><option>Economics</option><option>Commerce</option>
+          <option>Accountancy</option><option>Business Studies</option><option>Computer Science</option>
+          <option>General Aptitude</option><option>Entrance Exams (e.g. NEET, JEE)</option>
+          <option>Competitive Exams (UPSC, SSC, etc.)</option><option>Other Subjects</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="address">Full Address *</label>
+        <textarea id="address" name="address" rows="3" required aria-required="true" autocomplete="off"></textarea>
+      </div>
+
+      <button type="submit" aria-label="Submit application form">Submit Application</button>
+    </form>
+
+    <div class="info-text" tabindex="0">
+      After submitting the form, you will receive a confirmation. If a visually impaired student selects you, we will contact you using the information provided.
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 BlindTechAgent. All rights reserved. Dedicated to accessibility and inclusion.</p>
+  </footer>
+      <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="scripts/firebase.js"></script>
+<script src="scripts/application_form.js"></script>
+</body>
+</html>

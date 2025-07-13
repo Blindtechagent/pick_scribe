@@ -1,0 +1,142 @@
+/* Global Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  background-color: #f4fafe;
+  color: #222;
+  padding: 20px;
+}
+
+/* Headers & Text */
+h1, h2 {
+  color: #0d47a1;
+}
+p, li, label {
+  color: #333;
+}
+
+/* Links */
+a {
+  color: #1976d2;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.tagline {
+  font-size: 1.1rem;
+  color: #444;
+  margin-top: 8px;
+}
+
+/* Section Styling */
+section, main {
+  background: linear-gradient(to bottom, #ffffff, #f1f8ff);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
+
+/* Buttons */
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background-color: #1976d2;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+button:hover,
+button:focus {
+  background-color: #0d47a1;
+  outline: none;
+}
+
+/* Action Buttons Container */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+label {
+  font-weight: 600;
+}
+input, select, textarea {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  transition: border 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #2e7d32;
+  outline: none;
+}
+
+/* Info Box */
+.info-text {
+  background-color: #e3f2fd;
+  padding: 15px;
+  font-size: 0.95rem;
+  color: #555;
+  border-left: 5px solid #1976d2;
+  border-radius: 4px;
+}
+
+/* Guidelines Section */
+.guidelines {
+  background: #fff3cd;
+  border-left: 5px solid #fb8c00;
+}
+
+/* Contact Section */
+.contact a {
+  color: #7e57c2;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  body {
+    padding: 10px;
+  }
+  main {
+    padding: 20px;
+  }
+}

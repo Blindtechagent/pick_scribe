@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Scribe Profile</title>
+  <link rel="stylesheet" href="styles/global_styles.css"/>
+  <style>
+    .container {
+  max-width: 700px;
+  margin: auto;
+  background: linear-gradient(to bottom, #ffffff, #f9f9ff);
+  border-left: 6px solid #42a5f5;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #1565c0;
+}
+
+.detail-group {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.detail-group strong {
+  display: inline-block;
+  width: 160px;
+  font-weight: 600;
+  color: #1a237e;
+}
+
+/* Contact Buttons */
+.contact-buttons {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.contact-buttons button {
+  margin: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.contact-buttons button:hover {
+  transform: translateY(-3px);
+}
+
+/* Button Colors */
+.whatsapp {
+  background-color: #25D366;
+}
+.whatsapp:hover {
+  background-color: #1eb94d;
+}
+
+.call {
+  background-color: #1976D2;
+}
+.call:hover {
+  background-color: #1258a8;
+}
+
+.email {
+  background-color: #7e57c2;
+}
+.email:hover {
+  background-color: #5e35b1;
+}
+
+/* Info Box */
+.info-box {
+  background-color: #fff8e1;
+  color: #6d4c41;
+  padding: 1.2rem;
+  margin-top: 2.2rem;
+  border-left: 6px solid #ffb300;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Back Button */
+.back-button {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.65rem 1.3rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #455a64;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #263238;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .detail-group strong {
+    width: 120px;
+  }
+
+  .contact-buttons button,
+  .back-button {
+    width: 100%;
+    margin: 0.4rem 0;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <div class="container" id="scribe-details">
+    <h2>Volunteer Scribe Details</h2>
+
+    <div class="detail-group"><strong>Full Name:</strong> <span id="name">Loading...</span></div>
+    <div class="detail-group"><strong>Email:</strong> <span id="email">Loading...</span></div>
+    <div class="detail-group"><strong>Phone Number:</strong> <span id="phone">Loading...</span></div>
+    <div class="detail-group"><strong>State:</strong> <span id="state">Loading...</span></div>
+    <div class="detail-group"><strong>Subject Expertise:</strong> <span id="subject">Loading...</span></div>
+    <div class="detail-group"><strong>Address:</strong> <span id="address">Loading...</span></div>
+
+    <div class="contact-buttons">
+      <button class="whatsapp" id="whatsappBtn">Chat on WhatsApp</button>
+      <button class="call" id="callBtn">Call the Scribe</button>
+      <button class="email" id="emailBtn">Send Email</button>
+    </div>
+
+    <div class="info-box">
+      ⚠️ <strong>Please Note:</strong><br>
+      This scribe has voluntarily registered to assist visually impaired students during exams. 
+      Ensure respectful communication and only contact them regarding legitimate scribe requests.
+      Sharing this contact for unrelated purposes is prohibited.
+    </div>
+
+    <button class="back-button" onclick="goBack()">← Back to All Scribes</button>
+  </div>
+
+        <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="scripts/firebase.js"></script>
+  <script>
+        const db = firebase.database().ref('scribes');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const scribeId = urlParams.get('id');
+
+    if (!scribeId) {
+      document.getElementById('scribe-details').innerHTML = '<p>Scribe ID is missing in the URL.</p>';
+    } else {
+      db.child(scribeId).once('value', (snapshot) => {
+        const scribe = snapshot.val();
+        if (!scribe) {
+          document.getElementById('scribe-details').innerHTML = '<p>Scribe not found.</p>';
+          return;
+        }
+
+        const name = scribe.full_name || 'N/A';
+        const email = scribe.email_id || 'N/A';
+        const phone = scribe.phone_number || 'N/A';
+        const state = scribe.State || 'N/A';
+        const subject = scribe.Subject || 'N/A';
+        const address = scribe.Address || 'N/A';
+
+        document.getElementById('name').textContent = name;
+        document.getElementById('email').textContent = email;
+        document.getElementById('phone').textContent = phone;
+        document.getElementById('state').textContent = state;
+        document.getElementById('subject').textContent = subject;
+        document.getElementById('address').textContent = address;
+
+        // Set contact buttons
+        document.getElementById('whatsappBtn').onclick = () => {
+          window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=Hello ${encodeURIComponent(name)}, I’m reaching out regarding scribe assistance.`, '_blank');
+        };
+
+        document.getElementById('callBtn').onclick = () => {
+          window.location.href = `tel:${phone}`;
+        };
+
+        document.getElementById('emailBtn').onclick = () => {
+          window.location.href = `mailto:${email}?subject=Scribe%20Assistance%20Request&body=Hello ${name},%0D%0A%0D%0AI am reaching out regarding scribe support for an upcoming exam.`;
+        };
+      });
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
